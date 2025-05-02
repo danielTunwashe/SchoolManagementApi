@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagemetApi.Application.Services.Interface;
 using SchoolManagemetApi.Application.Services.Repository;
@@ -16,6 +18,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
